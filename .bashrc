@@ -14,8 +14,8 @@
 shopt -s checkwinsize
 
 # System info
-# `pacman -S screenfetch`
-[[ -f /usr/bin/screenfetch ]] && echo && /usr/bin/screenfetch -w
+# `pacman -S neofetch`
+[[ -f /usr/bin/neofetch ]] && echo && /usr/bin/neofetch -w
 
 # Pseudorandom message
 # `pacman -S fortune-mod`
@@ -31,11 +31,9 @@ fi
 BROWSER=/usr/bin/firefox
 EDITOR=/usr/bin/vim
 
-export PATH="$PATH:~/bin"
+#export PATH="$PATH:~/bin"
 
 # Autocomplete for tldr
 complete -W "$(tldr 2>/dev/null --list)" tldr
 
 eval "$(dircolors)"
-
-echo $RESET
