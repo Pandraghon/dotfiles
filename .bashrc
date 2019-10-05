@@ -22,7 +22,13 @@ shopt -s checkwinsize
 [[ -f /usr/bin/fortune ]] && echo && /usr/bin/fortune -a
 
 alias ls='ls --color=auto'
-PS1='┌─[`if [ \$? = 0 ]; then echo \[\e[32m\]✔\[\e[0m\]; else echo \[\e[31m\]✘\[\e[0m\]; fi`]\n├─[\[\e[36m\]\t\[\e[0m\]]—[\[\e[1;28m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]]—[\[\e[34m\]\w\[\e[0m\]]\n└▶ \[\e[37m\]\$\[\e[0m\] '
+
+function customize_prompt {
+	local __last_status='`if [ \$? = 0 ]; then echo \[\e[32m\]✔\[\e[0m\]; else echo \[\e[31m\]✘\[\e[0m\]; fi`'
+	local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/─[\[\e[32m\]\\\\\1\[\e[0m\]]\ /`'
+	export PS1="┌─[$__last_status]\n├─[\[\e[36m\]\t\[\e[0m\]]—[\[\e[1;28m\]\u\[\e[0m\]@\[\e[1;34m\]\h\[\e[0m\]]—[\[\e[34m\]\w\[\e[0m\]]$__git_branch\n└▶ \[\e[37m\]\$\[\e[0m\] "
+}
+customize_prompt
 
 if [ -e ~/.bashrc.aliases ] ; then
    source ~/.bashrc.aliases
